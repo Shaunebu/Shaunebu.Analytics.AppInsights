@@ -51,7 +51,7 @@ Initialization
 ```csharp
 // Initialize AppInsightsManager in App.xaml.cs
 AppInsightsManager.Current.Initialize(
-    instrumentationKey: "<YOUR-INSTRUMENTATION-KEY>",
+    connectionString: "<YOUR-CONNECTION-STRING>",
     debugMode: true,           // Optional: enables debug logging
     batchIntervalSeconds: 30   // Optional: flush interval in seconds
 );
@@ -60,8 +60,8 @@ AppInsightsManager.Current.Initialize(
 Optional: provide a **custom TelemetryClient**:
 
 ```csharp
-var customClient = new TelemetryClient(new TelemetryConfiguration("<YOUR-INSTRUMENTATION-KEY>"));
-AppInsightsManager.Current.Initialize("<YOUR-INSTRUMENTATION-KEY>", customClient: customClient);
+var customClient = new TelemetryClient(new TelemetryConfiguration("<YOUR-CONNECTION-STRING>"));
+AppInsightsManager.Current.Initialize("<YOUR-CONNECTION-STRING>", customClient: customClient);
 ```
 
 * * *
@@ -124,7 +124,7 @@ Properties
 | Property | Type | Description |
 | --- | --- | --- |
 | `Current` | `AppInsightsManager` | Singleton instance of the manager. |
-| `InstrumentationKey` | `string?` | AppInsights instrumentation key. |
+| `connectionString` | `string?` | AppInsights connection string. |
 | `Logger` | `IAppLogger?` | Optional logger for debug/info/error messages. |
 | `EnableDebugMode` | `bool` | Enable or disable debug logging. |
 | `SessionId` | `string` | Current session identifier (auto-generated if not set). |
@@ -137,7 +137,7 @@ Methods
 
 | Method | Parameters | Description |
 | --- | --- | --- |
-| `Initialize(string instrumentationKey, bool debugMode = false, int batchIntervalSeconds = 30, TelemetryClient? customClient = null)` | `instrumentationKey`: AppInsights key  <br>`debugMode`: enable debug logging  <br>`batchIntervalSeconds`: flush interval  <br>`customClient`: optional custom TelemetryClient | Initializes the telemetry manager and hooks into MAUI lifecycle events. |
+| `Initialize(string connectionString, bool debugMode = false, int batchIntervalSeconds = 30, TelemetryClient? customClient = null)` | `instrumentationKey`: AppInsights key  <br>`debugMode`: enable debug logging  <br>`batchIntervalSeconds`: flush interval  <br>`customClient`: optional custom TelemetryClient | Initializes the telemetry manager and hooks into MAUI lifecycle events. |
 | `TrackEvent(string name, Dictionary<string, string>? properties = null, double? metric = null)` | `name`: event name  <br>`properties`: optional properties  <br>`metric`: optional numeric value | Tracks a custom event. |
 | `TrackPageView(string pageName, Dictionary<string, string>? properties = null)` | `pageName`: page identifier  <br>`properties`: optional properties | Tracks a page view. |
 | `TrackException(Exception ex, Dictionary<string, string>? properties = null)` | `ex`: Exception object  <br>`properties`: optional properties | Tracks an exception. |
@@ -158,7 +158,7 @@ public partial class App : Application
 
         // Initialize AppInsights
         AppInsightsManager.Current.Logger = new ConsoleLogger();
-        AppInsightsManager.Current.Initialize("<YOUR-INSTRUMENTATION-KEY>", debugMode: true);
+        AppInsightsManager.Current.Initialize("<YOUR-CONNECTION-STRING>", debugMode: true);
 
         // Track app start
         AppInsightsManager.Current.TrackEvent("App_Started");

@@ -31,13 +31,13 @@ static async Task DemoBasicTracking()
     Console.WriteLine("1. 🔧 Basic Initialization");
     Console.WriteLine("---------------------------");
 
-    string instrumentationKey = "your-instrumentation-key-here";
+    string connectionString = "your-instrumentation-key-here";
     var consoleLogger = new ConsoleLogger();
 
     // Initialize with default platform info
     AppInsightsManager.Current.Logger = consoleLogger;
     AppInsightsManager.Current.Initialize(
-        instrumentationKey: instrumentationKey,
+        connectionString: connectionString,
         debugMode: true,
         batchIntervalSeconds: 10
     );
@@ -55,7 +55,7 @@ static async Task DemoBasicTracking()
     Console.WriteLine($"User ID: {AppInsightsManager.Current.UserId}");
 
     await Task.Delay(1500);
-    await AppInsightsManager.Current.FlushAsync();
+    //await AppInsightsManager.Current.FlushAsync();
 }
 
 static async Task DemoCustomPlatformConfig()
@@ -63,7 +63,7 @@ static async Task DemoCustomPlatformConfig()
     Console.WriteLine("\n2. 🖥️ Custom Platform Configuration");
     Console.WriteLine("-----------------------------------");
 
-    string instrumentationKey = "your-instrumentation-key-here";
+    string connectionString = "your-instrumentation-key-here";
     var consoleLogger = new ConsoleLogger();
 
     // Create custom platform information
@@ -78,7 +78,7 @@ static async Task DemoCustomPlatformConfig()
     // Re-initialize with custom platform info
     AppInsightsManager.Current.Logger = consoleLogger;
     AppInsightsManager.Current.Initialize(
-        instrumentationKey: instrumentationKey,
+        connectionString: connectionString,
         debugMode: true,
         batchIntervalSeconds: 10,
         platformInfo: platformInfo
@@ -102,7 +102,7 @@ static async Task DemoCustomPlatformConfig()
     Console.WriteLine($"App Version: {AppInsightsManager.Current.AppVersion}");
 
     await Task.Delay(1500);
-    await AppInsightsManager.Current.FlushAsync();
+    //await AppInsightsManager.Current.FlushAsync();
 }
 
 static async Task DemoStorageManagement()
@@ -110,12 +110,12 @@ static async Task DemoStorageManagement()
     Console.WriteLine("\n3. 💾 Storage Management");
     Console.WriteLine("------------------------");
 
-    string instrumentationKey = "your-instrumentation-key-here";
+    string connectionString = "your-instrumentation-key-here";
     var consoleLogger = new ConsoleLogger();
 
     AppInsightsManager.Current.Logger = consoleLogger;
     AppInsightsManager.Current.Initialize(
-        instrumentationKey: instrumentationKey,
+        connectionString: connectionString,
         debugMode: true
     );
 
@@ -138,7 +138,7 @@ static async Task DemoStorageManagement()
     Console.WriteLine($"User ID after clear: {AppInsightsManager.Current.UserId}");
 
     await Task.Delay(1000);
-    await AppInsightsManager.Current.FlushAsync();
+   // await AppInsightsManager.Current.FlushAsync();
 }
 
 public class ConsoleLogger : IAppLogger
