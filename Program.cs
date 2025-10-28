@@ -2,7 +2,7 @@
 using Shaunebu.Analytics.AppInsights.Abstractions;
 using Shaunebu.Analytics.AppInsights.Models;
 
-Console.WriteLine("📊 Application Insights Manager Demo (MAUI-Free)");
+Console.WriteLine("📊 Application Insights Manager Demo");
 Console.WriteLine("================================================\n");
 
 try
@@ -31,7 +31,7 @@ static async Task DemoBasicTracking()
     Console.WriteLine("1. 🔧 Basic Initialization");
     Console.WriteLine("---------------------------");
 
-    string connectionString = "your-instrumentation-key-here";
+    string connectionString = "your-connection-string";
     var consoleLogger = new ConsoleLogger();
 
     // Initialize with default platform info
@@ -63,7 +63,7 @@ static async Task DemoCustomPlatformConfig()
     Console.WriteLine("\n2. 🖥️ Custom Platform Configuration");
     Console.WriteLine("-----------------------------------");
 
-    string connectionString = "your-instrumentation-key-here";
+    string connectionString = "your-connection-string";
     var consoleLogger = new ConsoleLogger();
 
     // Create custom platform information
@@ -110,7 +110,7 @@ static async Task DemoStorageManagement()
     Console.WriteLine("\n3. 💾 Storage Management");
     Console.WriteLine("------------------------");
 
-    string connectionString = "your-instrumentation-key-here";
+    string connectionString = "your-connection-string";
     var consoleLogger = new ConsoleLogger();
 
     AppInsightsManager.Current.Logger = consoleLogger;
@@ -138,7 +138,7 @@ static async Task DemoStorageManagement()
     Console.WriteLine($"User ID after clear: {AppInsightsManager.Current.UserId}");
 
     await Task.Delay(1000);
-   // await AppInsightsManager.Current.FlushAsync();
+    //await AppInsightsManager.Current.FlushAsync();
 }
 
 public class ConsoleLogger : IAppLogger
